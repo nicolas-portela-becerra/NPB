@@ -53,8 +53,9 @@ GO
 --Intentamos conectarnos desde NPB (abcd1234.)
 --Al intentar conectarnos da error porque no tiene permiso de conecxion
 
---Conceder perrmiso de conencxion
+--Conceder perrmiso de conexión
 GRANT CONNECT TO NPB
 GO
 --Vuelve a dar error, porque es un usuario de una base de datos especial ("Contenida") y hay que especificar que solo se conecta a esta base de datos
+--No da error es una prank/joke
 
