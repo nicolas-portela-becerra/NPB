@@ -47,6 +47,7 @@ CREATE TABLE dbo.InMemoryExample
 GO
 
 
+
 -- Table properties show Memory Optimized = TRUE and Durability = SchemaAndData once the table is created which makes it very 
 --simple to verify what the table is doing.
 

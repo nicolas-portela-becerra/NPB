@@ -15,10 +15,13 @@ CREATE TABLE [dbo].#tempBackup --ES UNA TABLA TEMPORAL DONDE SE GUARDAN LOS NOMB
 (intID int identity (1, 1),
 name VARCHAR(200))
 --SABEMOS QUE LA TABLA ES TEMPORAL PORQUE TIENE UN #
+
 --Hay que crear la carpeta donde vamos a mandar los backup
 --SET @path = 'C:\Backup\'
+
 --Hacer que aparezca fecha en el nombre del backup
 SET @filedate = CONVERT(VARCHAR(20), GETDATE(), 112) --112 es un formato para la fecha, hay distintos tipos de formatos
+
 --Hacer que aparezca fecha y hora en el nombre del backup
 --SET @filedate = CONVERT(VARCHAR(20), GETDATE(), 112) + '_' + REPLACE (CONVERT(VARCHAR(20), GETDATE(), 108), ':', '') 
 
@@ -29,6 +32,7 @@ INSERT INTO dbo.#tempBackup (name)
 	--WHERE name in ('Northwind', 'pubs') --Elijo cuales quiero que tengan backup
 	WHERE name in ('AdventureWorks2017')
 	--WHERE name NOT IN ('master', 'model', 'msdb', 'tempdb') --Elijo cuales no tienen que tener backup
+
 SELECT TOP 1 @backupcount = intID
 FROM dbo.#tempbackup
 ORDER BY intID DESC
@@ -59,6 +63,7 @@ BEGIN
 				SET @currentbackup = @currentbackup + 1
 		END
 END
+
 EXEC Backup_All_Databases
 	@path = 'C:\Backup\'
 GO
@@ -77,6 +82,7 @@ GO
 --Processed 584 pages for database 'pubs', file 'pubs' on file 1.
 --Processed 2 pages for database 'pubs', file 'pubs_log' on file 1.
 --BACKUP DATABASE successfully processed 586 pages in 0.045 seconds (101.573 MB/sec).
+
 
 EXEC Backup_All_Databases --Ahora hago backup de AdventureWorks2017
 	@path = 'C:\Backup\'
